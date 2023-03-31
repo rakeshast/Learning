@@ -9,9 +9,9 @@
         <h2 class="h2 text-center mb-4">Login to your account</h2>
         <form method="post" wire:submit.prevent="LoginHandler()" autocomplete="off" >
           <div class="mb-3">
-            <label class="form-label">Email address</label>
-            <input type="email" class="form-control" placeholder="your@email.com" autocomplete="off" wire:model="email">
-            @error('email')
+            <label class="form-label">Email or username</label>
+            <input type="text" class="form-control" placeholder="Enter email or username" autocomplete="off" wire:model="login_id">
+            @error('login_id')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
           </div>
