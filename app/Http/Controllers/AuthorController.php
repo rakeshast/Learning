@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthorController extends Controller
 {
+
     public function index(Request $req){
         return view('back.pages.home');
     }
@@ -15,4 +16,9 @@ class AuthorController extends Controller
         Auth::guard('web')->logout();
         return redirect('/author/login');
     }
+
+    public function ResetForm(){
+        
+    }
+
 }
