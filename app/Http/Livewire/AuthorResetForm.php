@@ -35,7 +35,7 @@ class AuthorResetForm extends Component
         $check_token = DB::table('password_resets')->where([
             'email' => $this->email,
             'token' => $this->token,
-        ]);
+        ])->first();
 
         if (!$check_token) {
             session()->flash('fail', "Invalid Token");
