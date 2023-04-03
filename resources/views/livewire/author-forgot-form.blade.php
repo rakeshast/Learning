@@ -6,7 +6,7 @@
         <div class="alert alert-success"> {{ Session::get('success') }} </div>
     @endif
     @if (Session::get('fail'))
-        <div class="alert alert-danger"> {{ Session::get('success') }} </div>
+        <div class="alert alert-danger"> {{ Session::get('fail') }} </div>
     @endif
     <form class="card card-md" method="post" wire:submit.prevent='ForgotHandler()' autocomplete="off" novalidate="">
         <div class="card-body">
