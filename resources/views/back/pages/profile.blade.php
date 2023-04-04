@@ -20,12 +20,18 @@
             <div class="tab-pane active show" id="tabs-details">
               <h4>Personal Detail</h4>
               <div>
+
                 @livewire('author-personal-details')
+                
               </div>
             </div>
             <div class="tab-pane" id="tabs-password">
               <h4>Change Password</h4>
-              <div>Fringilla egestas nunc quis tellus diam rhoncus ultricies tristique enim at diam, sem nunc amet, pellentesque id egestas velit sed</div>
+              <div>
+
+                @livewire('author-changer-password-form')
+
+              </div>
             </div>
           </div>
         </div>
