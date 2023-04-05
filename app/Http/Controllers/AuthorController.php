@@ -25,33 +25,28 @@ class AuthorController extends Controller
         return view('back.pages.auth.reset', $data)->with(['token'=> $token, 'email'=> $request->email ]);
     }
 
-    // public function crop(Request $request){
-    //     $path = 'files/';
-    //     if (!File::exists(public_path($path))) {
-    //          File::makeDirectory(public_path($path),0777,true);
-    //     }
-    //     $file = $request->file('file');
-    //     $new_image_name = 'UIMG'.date('Ymd').uniqid().'.jpg';
-    //     $upload = $file->move(public_path($path), $new_image_name);
-    //     if($upload){
-    //         return response()->json(['status'=>1, 'msg'=>'Image has been cropped successfully.', 'name'=>$new_image_name]);
-    //     }else{
-    //           return response()->json(['status'=>0, 'msg'=>'Something went wrong, try again later']);
-    //     }
-    // }
-
     public function crop(Request $request){
-        $path = 'files/';
-        if (!File::exists(public_path($path))) {
-             File::makeDirectory(public_path($path),0777,true);
-        }
+        $user = User::find(auth('web')->id());
+        $path = 'back/dist/img/authors/';
         $file = $request->file('file');
-        $new_image_name = 'UIMG'.date('Ymd').uniqid().'.jpg';
-        $upload = $file->move(public_path($path), $new_image_name);
-        if($upload){
-            return response()->json(['status'=>1, 'msg'=>'Image has been cropped successfully.', 'name'=>$new_image_name]);
+        $old_picture = $user->getAttributes()['picture'];
+        $file_path = $path.$old_picture;
+        
+        $new_picture_name = 'UIMG'.$user->id.time().rand(1,100000).'.jpg';
+
+        if ($old_picture != null && File::exists(public_path($file_path))) {
+            File::delete(public_path($file_path));
+        }
+
+        $upload = $file->move(public_path($path), $new_picture_name);
+
+        if ($upload) {
+            $user->update([
+                'picture' => $new_picture_name,
+            ]);
+            return response()->json(['status' => 1, 'msg' => 'Your profile picture has been successfully updated.']);
         }else{
-              return response()->json(['status'=>0, 'msg'=>'Something went wrong, try again later']);
+            return response()->json(['status' => 0, 'msg' => 'Something went wrong.']);
         }
     }
 

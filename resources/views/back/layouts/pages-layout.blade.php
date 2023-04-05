@@ -33,6 +33,7 @@
       	font-feature-settings: "cv03", "cv04", "cv11";
       }
     </style>
+    <link href="{{ asset('back/dist/libs/ijabo/ijaboCropTool.min.css') }}" rel="stylesheet">
   </head>
   <body >
     <div class="page">
@@ -51,8 +52,11 @@
       </div>
     </div>
     <!-- Libs JS -->
-	
+    
+    
+    
 	<script src="{{ asset('back/dist/libs/jquery/jquery-3.6.0.min.js') }}"></script>
+  <script src="{{ asset('back/dist/libs/ijabo/ijaboCropTool.min.js') }}"></script> 
     <script src="./back/dist/js/demo-theme.min.js"></script>
     <script src="./back/dist/libs/apexcharts/dist/apexcharts.min.js" defer></script>
     <script src="./back/dist/libs/jsvectormap/dist/js/jsvectormap.min.js" defer></script>
@@ -79,5 +83,10 @@
 		});
 	</script>
     <script src="./back/dist/js/demo.min.js" defer></script>    
+    
+   
+  
+  
+    
   </body>
 </html>
