@@ -34,9 +34,11 @@
         }
     },
     "scripts": {
+        
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan vendor:publish --force --tag=livewire:assets --ansi"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
@@ -58,6 +60,7 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+    
     "minimum-stability": "dev",
     "prefer-stable": true
 }
