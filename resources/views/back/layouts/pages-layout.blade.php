@@ -16,6 +16,7 @@
     <title>@yield('pageTitle')</title>
     <!-- CSS files -->
     <base href="/">
+    <link rel="shortcut icon" href="{{ \App\Models\Setting::find(1)->blog_favicon }}" type="image/x-icon">
     <link href="./back/dist/css/tabler.min.css" rel="stylesheet"/>
     <link href="./back/dist/css/tabler-flags.min.css" rel="stylesheet"/>
     <link href="./back/dist/css/tabler-payments.min.css" rel="stylesheet"/>
@@ -62,6 +63,7 @@
     <script src="./back/dist/libs/apexcharts/dist/apexcharts.min.js" defer></script>
     <script src="./back/dist/libs/jsvectormap/dist/js/jsvectormap.min.js" defer></script>
     <script src="./back/dist/libs/jsvectormap/dist/maps/world.js" defer></script>
+    <script src="{{ asset('back/dist/libs/ijaboViewer/jquery.ijaboViewer.min.js') }}"></script>
     <script src="./back/dist/libs/jsvectormap/dist/maps/world-merc.js" defer></script>
     <!-- Tabler Core -->
     <script src="./back/dist/js/tabler.min.js" defer></script>
