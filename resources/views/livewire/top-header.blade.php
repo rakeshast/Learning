@@ -1,4 +1,4 @@
-<div>
+
 
     <header class="navbar navbar-expand-md navbar-light d-print-none sticky-top">
         <div class="container-xl">
@@ -6,7 +6,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href="author/home">
+            <a href="{{ route('author.home') }}">
               <img src="./back/static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
           </h1>
@@ -117,12 +117,11 @@
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 <a href="#" class="dropdown-item">Status</a>
-                <a href="/author/profile" class="dropdown-item">Profile</a>
+                <a href="{{ route('author.profile') }}" class="dropdown-item">Profile</a>
                 <a href="#" class="dropdown-item">Feedback</a>
                 <div class="dropdown-divider"></div>
-                <a href="/author/profile" class="dropdown-item">Profile</a>
-                <a href="author/logout" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a> 
-                <form action="author/logout" id="logout-form" method="post">@csrf</form>
+                <a href="{{ route('author.logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a> 
+                <form action="{{ route('author.logout') }}" id="logout-form" method="post">@csrf</form>
               </div>
             </div>
           </div>
@@ -130,14 +129,14 @@
             <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="author/home" >
+                  <a class="nav-link" href="{{ route('author.home') }}" >
                     <span class="nav-link-title">
                       Home
                     </span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="author/home" >
+                  <a class="nav-link" href="{{ route('author.home') }}" >
                     <span class="nav-link-title">
                       News & Categories
                     </span>
@@ -176,4 +175,4 @@
         </div>
     </header>
 
-</div>
+

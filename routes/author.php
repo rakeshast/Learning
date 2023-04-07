@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthorController;
 
 
-Route::prefix('author')->name('author')->group(function(){
+Route::prefix('author')->name('author.')->group(function(){
 
     Route::middleware(['guest:web'])->group(function(){ 
         Route::view('/login', 'back.pages.auth.login')->name('login');
@@ -16,6 +16,7 @@ Route::prefix('author')->name('author')->group(function(){
         Route::get('/home', [AuthorController::class, 'index'])->name('home');
         Route::post('/logout', [AuthorController::class, 'logout'])->name('logout');
         Route::view('/profile', 'back.pages.profile')->name('profile');
+        Route::post('/crop',[AuthorController::class, 'crop'])->name('crop');
     });
     
 });

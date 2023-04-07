@@ -49,7 +49,7 @@
                 <span class="text-danger"> @error('confirm_new_password') {{ $message }} @enderror </span>
             </div>
             <div class="mb-2">               
-                <a href="author/login">Back to login page</a>                
+                <a href="{{ route('author.login') }}">Back to login page</a>                
             </div>
             <div class="form-footer">
             <button type="submit" class="btn btn-primary w-100">Reset password</button>

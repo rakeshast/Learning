@@ -24,7 +24,7 @@
             <label class="form-label">
               Password
               <span class="form-label-description">
-                <a href='author/forgot-password'>I forgot password</a>
+                <a href='{{ route("author.forgot-password") }}'>I forgot password</a>
               </span>
             </label>
             <div class="input-group input-group-flat">

@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('crop',[AuthorController::class, 'crop'])->name('crop');
+

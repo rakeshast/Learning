@@ -20,7 +20,7 @@
     <link href="./back/dist/css/tabler-flags.min.css" rel="stylesheet"/>
     <link href="./back/dist/css/tabler-payments.min.css" rel="stylesheet"/>
     <link href="./back/dist/css/tabler-vendors.min.css" rel="stylesheet"/>
-	{{-- <link rel="stylesheet" href="{{ asset('back/dist/libs/ijabo/ijabo.min.css') }}"> --}}
+	  
     @stack('stylesheets')
     @livewireStyles
     <link href="./back/dist/css/demo.min.css" rel="stylesheet"/>
@@ -33,7 +33,8 @@
       	font-feature-settings: "cv03", "cv04", "cv11";
       }
     </style>
-    <link href="{{ asset('back/dist/libs/ijabo/ijaboCropTool.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('back/dist/libs/ijaboCropTool/ijaboCropTool.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('back/dist/libs/ijabo/ijabo.min.css') }}" rel="stylesheet">
   </head>
   <body >
     <div class="page">
@@ -51,12 +52,12 @@
         @include('back.layouts.inc.footer')
       </div>
     </div>
-    <!-- Libs JS -->
+    <!-- Libs JS -->    
     
     
-    
-	<script src="{{ asset('back/dist/libs/jquery/jquery-3.6.0.min.js') }}"></script>
-  <script src="{{ asset('back/dist/libs/ijabo/ijaboCropTool.min.js') }}"></script> 
+	  <script src="{{ asset('back/dist/libs/jquery/jquery-3.6.0.min.js') }}"></script>
+	  <script src="{{ asset('back/dist/libs/ijabo/ijabo.min.js') }}"></script>
+    <script src="{{ asset('back/dist/libs/ijaboCropTool/ijaboCropTool.min.js') }}"></script> 
     <script src="./back/dist/js/demo-theme.min.js"></script>
     <script src="./back/dist/libs/apexcharts/dist/apexcharts.min.js" defer></script>
     <script src="./back/dist/libs/jsvectormap/dist/js/jsvectormap.min.js" defer></script>

@@ -36,8 +36,8 @@ class AuthorForgotForm extends Component
         //     ['token' => $token, 'email' => $this->email]
         // );
         // dd($link);
-        
-        $link = 'http://larablog.local/author/password/reset/'.$token . '?email='.$this->email;
+        $link = route('author.reset-form', ['token'=>$token, 'email'=>$this->email]);
+        // $link = 'http://larablog.local/author/password/reset/'.$token . '?email='.$this->email;
         //  $link = route('author.reset-form', ['token'=> $token, 'email' => $this->email]);
         //  dd($link);
         $body_message = "We are received a request to reset the password for <b>Larablog</b> account associated with ". $this->email .". <br> You can reset your password by clicking the button below";
