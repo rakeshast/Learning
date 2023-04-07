@@ -17,6 +17,7 @@ Route::prefix('author')->name('author.')->group(function(){
         Route::post('/logout', [AuthorController::class, 'logout'])->name('logout');
         Route::view('/profile', 'back.pages.profile')->name('profile');
         Route::post('/crop',[AuthorController::class, 'crop'])->name('crop');
+        Route::view('/settings','back.pages.settings')->name('settings');
     });
     
 });

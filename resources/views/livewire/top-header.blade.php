@@ -164,7 +164,7 @@
                     </span>
                   </a>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="./activity.html">
+                    <a class="dropdown-item" href="{{ route('author.settings') }}">
                         General Settings
                       </a>  
                   </div>
