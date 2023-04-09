@@ -39,7 +39,7 @@
                 <form action="{{ route('author.change-blog-logo') }}" method="post" id="ChangeBlogLogoForm">
                   @csrf
                   <div class="mb-2">
-                    <input type="file" class="form-controll" name="blog_logo">
+                    <input type="file" class="form-control" name="blog_logo">
                   </div>
                   <button class="btn btn-primary">Change Logo</button>
                 </form>
@@ -52,7 +52,7 @@
                 <form action="{{ route('author.change-blog-favicon') }}" method="post" id="ChangeBlogFaviconForm">
                   @csrf
                   <div class="mb-2">
-                    <input type="file" class="form-controll" name="blog_favicon">
+                    <input type="file" class="form-control" name="blog_favicon">
                   </div>
                   <button class="btn btn-primary">Change Favicon</button>
                 </form>
@@ -62,7 +62,7 @@
         </div>
         <div class="tab-pane fade" id="tabs-activity-14" role="tabpanel">
           <h4>Social Media</h4>
-          <div>Donec ac vitae diam amet vel leo egestas consequat rhoncus in luctus amet, facilisi sit mauris accumsan nibh habitant senectus</div>
+          @livewire('author-social-media-form')
         </div>
       </div>
     </div>
