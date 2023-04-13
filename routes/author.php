@@ -24,3 +24,4 @@ Route::prefix('author')->name('author.')->group(function(){
     });
     
 });
+

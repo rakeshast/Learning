@@ -77,10 +77,10 @@
       imageShape: "square",
       allowedExtensions:['jpg', 'png', 'jpeg'],
       onErrorShape:function(message, element){
-        alert(message);
+        toastr.error(message);
       },
       onInvalidType:function(message, element){
-        alert(message);
+        toastr.error(message);
       },
       onSuccess:function(message, element){
         // alert(message);
