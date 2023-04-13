@@ -56,8 +56,8 @@
     <!-- Libs JS -->    
     
     
-	  <script src="{{ asset('back/dist/libs/jquery/jquery-3.6.0.min.js') }}"></script>
-	  <script src="{{ asset('back/dist/libs/ijabo/ijabo.min.js') }}"></script>
+	<script src="{{ asset('back/dist/libs/jquery/jquery-3.6.0.min.js') }}"></script>
+	<script src="{{ asset('back/dist/libs/ijabo/ijabo.min.js') }}"></script>
     <script src="{{ asset('back/dist/libs/ijaboCropTool/ijaboCropTool.min.js') }}"></script> 
     <script src="./back/dist/js/demo-theme.min.js"></script>
     <script src="./back/dist/libs/apexcharts/dist/apexcharts.min.js" defer></script>
