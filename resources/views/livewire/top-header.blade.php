@@ -134,9 +134,9 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ route('author.home') }}" >
+                  <a class="nav-link" href="{{ route('author.categories') }}" >
                     <span class="nav-link-title">
-                      News & Categories
+                      Categories
                     </span>
                   </a>
                 </li>

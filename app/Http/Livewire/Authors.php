@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Nette\Utils\Random;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\File;
 
 class Authors extends Component
 {
@@ -16,16 +17,21 @@ class Authors extends Component
     public $name, $email, $username, $author_type, $direct_publisher;
     public $search;
     public $perPage = 4;
+    public $selected_author_id;
+    public $blocked = 0;
 
     protected $listeners = [
-        'resetForm'
+        'resetForm',
+        'deleteAuthorAction'
     ];
 
-    public function mount(){
+    public function mount()
+    {
         $this->resetPage();
     }
 
-    public function updatingSearch(){
+    public function updatingSearch()
+    {
         $this->resetPage();
     }
 
@@ -73,24 +79,82 @@ class Authors extends Component
             $author_name = $this->name;
 
             if ($saved) {
-                
-                Mail::send('new-author-email-template', $data, function($message) use ($author_email, $author_name){
+
+                Mail::send('new-author-email-template', $data, function ($message) use ($author_email, $author_name) {
                     $message->from('noreply@larablog.com', 'Larablog');
                     $message->to($author_email, $author_name)
-                    ->subject('Account Creation');
+                        ->subject('Account Creation');
                 });
                 $this->showToastr('New author has been added to blog', 'success');
                 $this->name = $this->username = $this->email = $this->author_type = $this->direct_publisher = null;
                 $this->dispatchBrowserEvent('hide_add_author_modal');
-
             } else {
                 $this->showToastr('Something went wrong', 'error');
-            } 
-
-
+            }
         } else {
             $this->showToastr('Your are offline, check your connection and submit form again later', 'error');
         }
+    }
+
+    public function editAuthor($author)
+    {
+        // dd("Edit author", $author);
+
+        $this->selected_author_id = $author['id'];
+        $this->name = $author['name'];
+        $this->email = $author['email'];
+        $this->username = $author['username'];
+        $this->author_type = $author['type'];
+        $this->direct_publisher = $author['direct_publish'];
+        $this->blocked = $author['blocked'];
+
+        $this->dispatchBrowserEvent('showEditAuthorModal');
+    }
+
+    public function updateAuthor()
+    {
+        $this->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $this->selected_author_id,
+            'username' => 'required|min:6|max:20|unique:users,username,' . $this->selected_author_id,
+        ]);
+        if ($this->selected_author_id) {
+            $author = User::find($this->selected_author_id);
+            $author->update([
+                'name' => $this->name,
+                'email' => $this->email,
+                'username' => $this->username,
+                'type' => $this->author_type,
+                'blocked' => $this->blocked,
+                'direct_publish' => $this->direct_publisher,
+            ]);
+        }
+        $this->showToastr('Author detail has been successfully updated', 'success');
+        $this->dispatchBrowserEvent('hide_edit_author_modal');
+    }
+
+    public function deleteAuthor($author)
+    {
+        // dd("Author has been deleted successfully", $author);
+        $this->dispatchBrowserEvent('deleteAuthor', [
+            'title' => "Are you sure?",
+            'html' => "You want to delete this author: <br><br>" . $author['name'] . "<br>",
+            'id' => $author['id'],
+        ]);
+    }
+
+    public function deleteAuthorAction($id)
+    {
+        // dd("Yes deleted", $id);
+        $author = User::find($id);
+        $path = 'back/dist/img/authors/';
+        $author_picture = $author->getAttributes()['picture'];
+        $picture_fullpath = $path . $author_picture;
+        if ($author_picture != null || File::exists(public_path($picture_fullpath))) {
+            File::delete(public_path($picture_fullpath));
+        }
+        $author->delete();
+        $this->showToastr('Author has been deleted successfully', 'info');
     }
 
     public function isOnline($site = "https://www.youtube.com/")
@@ -114,9 +178,7 @@ class Authors extends Component
     {
         return view('livewire.authors', [
             'authors' => User::search(trim($this->search))
-            ->where('id', '!=', auth()->id())->paginate($this->perPage),
+                ->where('id', '!=', auth()->id())->paginate($this->perPage),
         ]);
     }
-
-    
 }

@@ -46,8 +46,8 @@
           </div>
         </div>
         <div class="d-flex">
-          <a href="#" class="card-btn">Edit</a>
-          <a href="#" class="card-btn">Delete</a>
+          <a href="#" wire:click.prevent="editAuthor({{ $author }})" class="card-btn">Edit</a>
+          <a href="#" class="card-btn" wire:click.prevent="deleteAuthor({{ $author }})">Delete</a>
         </div>
       </div>
     </div>
@@ -119,6 +119,78 @@
             <div class="modal-footer">
               <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  {{-- Edit Update MODALS --}}
+  <div class="modal modal-blur fade" id="edit_author_modal" tabindex="-1" role="dialog" aria-hidden="true" wire:ignore.self>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Author</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" wire:submit.prevent='updateAuthor()' method="post">
+            <input type="hidden" class="form-control" wire:model="selected_author_id">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" name="name" placeholder="Enter Author Name" wire:model='name'>
+              <span class="text-danger">@error('name') {{ $message }} @enderror</span>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="text" class="form-control" name="email" placeholder="Enter Author Email" wire:model='email'>
+              <span class="text-danger">@error('email') {{ $message }} @enderror</span>
+            </div>
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" name="username" placeholder="Enter Author Username" wire:model='username'>
+              <span class="text-danger">@error('username') {{ $message }} @enderror</span>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Author Type</label>
+              <div>
+                <select class="form-select" wire:model="author_type">
+                  @foreach (\App\Models\Type::all() as $type)
+                  <option value="{{$type->id}}">{{ $type->name }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <span class="text-danger">@error('author_type') {{ $message }} @enderror</span>
+            </div>
+            <div class="mb-3">
+              <div class="form-label">Is direct publisher?</div>
+              <div>
+                <label class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" wire:model="direct_publisher" value="0">
+                  <span class="form-check-label">No</span>
+                </label>
+                <label class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" wire:model="direct_publisher" value="1">
+                  <span class="form-check-label">Yes</span>
+                </label>
+              </div>
+              <span class="text-danger">@error('direct_publisher') {{ $message }} @enderror</span>
+            </div>
+
+            <div class="mb-3">
+              <div class="form-label">Blocked</div>
+              <label class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" checked="" wire:model="blocked">
+                <span class="form-check-label">Option 1</span>
+              </label>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Update</button>
             </div>
           </form>
         </div>
