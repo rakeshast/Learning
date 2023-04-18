@@ -156,7 +156,7 @@
                     </span>
                   </a>
                   <div class="dropdown-menu">
-                        <a class="dropdown-item" href="./empty.html">
+                        <a class="dropdown-item" href="{{ route('author.posts.add-post') }}">
                             Add new
                         </a>
                         <a class="dropdown-item" href="./accordion.html">

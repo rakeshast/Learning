@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Models\Setting;
 
+
+use App\Models\Post;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+
 class AuthorController extends Controller
 {
 
@@ -107,7 +112,54 @@ class AuthorController extends Controller
                 return response()->json(['status' => 0, "msg" => "Something weng wrong"]);
             }
         }
+
     }
 
+    public function createPost(Request $req){
+
+        $req->validate([
+            'post_title' => 'required|unique:posts,post_title',
+            'post_content' => 'required',
+            'post_category' => 'required|exists:sub_categories,id',
+            'featured_image' => 'required|mimes:jpeg,jpg,png|max:1024',
+        ]);
+
+        if ($req->hasFile('featured_image')) {
+            $path = "images/post_images/";
+            $file = $req->file('featured_image');
+            $filename = $file->getClientOriginalName();
+            $newfilename = time().'_'.$filename;
+
+            $uploaded = Storage::disk('public')->put($path.$newfilename, (string) file_get_contents($file));
+
+            if ($uploaded) {
+                $post = new Post();
+                $post->author_id = auth()->id();
+                $post->category_id = $req->post_category;
+                $post->post_title = $req->post_title;
+                $post->post_slug = Str::slug($req->post_title);
+                $post->post_content = $req->post_content;
+                $post->featured_image = $newfilename;
+                $saved = $post->save();
+                if ($saved) {
+                    return response()->json([
+                        'code' => 1,
+                        'msg' => "New post has been sucessfully created", 
+                    ]);
+                }else{
+                    return response()->json([
+                        'code' => 3,
+                        'msg' => "Something went wrong in saving post data", 
+                    ]);
+                }
+            }else{
+                return response()->json([
+                    'code' => 3,
+                    'msg' => "Something went wrong for uploading featured image.",
+                ]);
+            }
+
+        }
+    }
 
 }
