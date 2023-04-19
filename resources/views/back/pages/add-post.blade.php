@@ -36,8 +36,8 @@
                         <div class="post_category">Post category</div>
                         <select class="form-select" name="post_category">
                           <option value="">No Selected</option>
-                          @foreach (\App\Models\Category::all() as $category)
-                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                          @foreach (\App\Models\SubCategory::all() as $category)
+                            <option value="{{ $category->id }}">{{ $category->subcategory_name }}</option>
                           @endforeach
                         </select>
                         <span class="text-danger error_text post_category_error"></span>
