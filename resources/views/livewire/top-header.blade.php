@@ -133,14 +133,14 @@
                     </span>
                   </a>
                 </li>
+                @if (auth()->user()->type == 1)
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('author.categories') }}" >
                     <span class="nav-link-title">
                       Categories
                     </span>
                   </a>
-                </li>
-                @if (auth()->user()->type == 1)       
+                </li>                 
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('author.authors') }}" >
                     <span class="nav-link-title">
@@ -159,11 +159,14 @@
                         <a class="dropdown-item" href="{{ route('author.posts.add-post') }}">
                             Add new
                         </a>
-                        <a class="dropdown-item" href="{{route('author.posts.all_posts')}}">
+                        <a class="dropdown-item" href="{{route('author.posts.all-posts')}}">
                             All posts 
                         </a>
                   </div>
                 </li>
+
+                @if ( auth()->user()->type == 1 )                   
+                
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                     <span class="nav-link-title">
@@ -176,6 +179,9 @@
                       </a>  
                   </div>
                 </li>
+
+                @endif
+
               </ul>
             </div>
           </div>

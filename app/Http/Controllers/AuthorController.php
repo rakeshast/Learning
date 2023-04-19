@@ -90,7 +90,6 @@ class AuthorController extends Controller
         }
     }
 
-
     public function changeBlogFavicon(Request $req)
     {
 
@@ -149,8 +148,8 @@ class AuthorController extends Controller
 
             //Create Resized Image
             Image::make(storage_path('app/public/' . $path . $newfilename))
-            ->fit(500, 350)
-            ->save(storage_path('app/public/' . $path . 'thumbnails/' . 'resized_' . $newfilename));
+                ->fit(500, 350)
+                ->save(storage_path('app/public/' . $path . 'thumbnails/' . 'resized_' . $newfilename));
 
 
             if ($uploaded) {
@@ -181,4 +180,46 @@ class AuthorController extends Controller
             }
         }
     }
+
+    public function editPost(Request $request){
+        if ( !request()->post_id) {
+            return abort(404);
+        }else{
+            $post = Post::find(request()->post_id);
+            $data = [
+                'post' => $post,
+                'pageTitle' => 'Edit Post'
+            ];
+            return view('back.pages.edit_post', $data);
+        }
+    }
+
+    public function updatePost(Request $request){
+        if ( $request->hasFile('featured_image') ) {
+            return "its new image uploaded";
+        }else{
+            $request->validate([
+                'post_title' => 'required|unique:posts,post_title,'.$request->post_id,
+                'post_content' => 'required',
+                'post_category' => 'required|exists:sub_categories,id'
+            ]);
+
+            $post = Post::find($request->post_id);
+            $post->category_id = $request->post_category;
+            $post->post_slug = null;
+            $post->post_content = $request->post_content;
+            $post->post_title = $request->post_title;
+            $saved = $post->save();
+
+            if ($saved) {
+                return response()->json(['code' => 1, 'msg' => 'Posts has been successfully updated.']);
+            } else {
+                return response()->json(['code' => 3, 'msg' => 'Something went wrong for updating post.']);
+            }           
+
+
+        }
+    }
+
+
 }
