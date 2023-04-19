@@ -159,7 +159,7 @@
                         <a class="dropdown-item" href="{{ route('author.posts.add-post') }}">
                             Add new
                         </a>
-                        <a class="dropdown-item" href="./accordion.html">
+                        <a class="dropdown-item" href="{{route('author.posts.all_posts')}}">
                             All posts 
                         </a>
                   </div>
