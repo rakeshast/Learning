@@ -196,7 +196,72 @@ class AuthorController extends Controller
 
     public function updatePost(Request $request){
         if ( $request->hasFile('featured_image') ) {
-            return "its new image uploaded";
+            
+            $request->validate([
+                'post_title' => 'required|unique:posts,post_title,'.$request->post_id,
+                'post_content' => 'required',
+                'post_category' => 'required|exists:sub_categories,id',
+                'featured_image' => 'mimes:jpeg,jpg,png|max:1024',
+            ]);
+
+            $path = "images/post_images/";
+            $file = $request->file('featured_image');
+            $filename = $file->getClientOriginalName();
+            $new_filename = time().'_'.$filename;
+
+            $uploaded = Storage::disk('public')->put($path . $new_filename, (string) file_get_contents($file));
+            $post_thumbnails_path = $path . 'thumbnails';
+
+            if (!Storage::disk('public')->exists($post_thumbnails_path)) {
+                Storage::disk('public')->makeDirectory($post_thumbnails_path, 0755, true, true);
+            }
+
+            //Create square thumbnail
+            Image::make(storage_path('app/public/' . $path . $new_filename))
+                ->fit(200, 200)
+                ->save(storage_path('app/public/' . $path . 'thumbnails/' . 'thumb_' . $new_filename));
+
+            //Create Resized Image
+            Image::make(storage_path('app/public/' . $path . $new_filename))
+                ->fit(500, 350)
+                ->save(storage_path('app/public/' . $path . 'thumbnails/' . 'resized_' . $new_filename));
+            
+            if ($uploaded) {
+                // dd("working");
+                $old_post_image = Post::find($request->post_id)->featured_image;
+
+                if ($old_post_image != null && Storage::disk('public')->exists($path.$old_post_image)) {
+                    Storage::disk('public')->delete($path.$old_post_image);
+
+                    if (Storage::disk('public')->exists($path.'thumbnails/resized_'.$old_post_image)) {
+                        Storage::disk('public')->delete($path.'thumbnails/resized_'.$old_post_image);
+                    }
+                    if (Storage::disk('public')->exists($path.'thumbnails/thumb_'.$old_post_image)) {
+                        Storage::disk('public')->delete($path.'thumbnails/thumb_'.$old_post_image);
+                    }  
+                                     
+                }
+
+                $post = Post::find($request->post_id);
+                $post->category_id = $request->post_category;
+                $post->post_title = $request->post_title;
+                $post->post_slug = null;
+                $post->post_content = $request->post_content;
+                $post->featured_image = $new_filename;
+                $saved = $post->save();
+
+                if ($saved) {
+                    return response()->json(['code' => 1, 'msg' => 'Post has been successfully updated.']);
+                } else {
+                    return response()->json(['code' => 3, 'msg' => 'Something went wrong for updating post.']);
+                }
+                
+                
+            } else {
+                return response()->json(['code' => 3, 'msg' => 'Error in uploading new featured image.']);
+            }
+            
+
         }else{
             $request->validate([
                 'post_title' => 'required|unique:posts,post_title,'.$request->post_id,
@@ -215,9 +280,7 @@ class AuthorController extends Controller
                 return response()->json(['code' => 1, 'msg' => 'Posts has been successfully updated.']);
             } else {
                 return response()->json(['code' => 3, 'msg' => 'Something went wrong for updating post.']);
-            }           
-
-
+            }    
         }
     }
 

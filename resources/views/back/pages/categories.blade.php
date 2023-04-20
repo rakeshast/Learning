@@ -35,6 +35,16 @@
             // $(this).find('form').trigger('reset');
             Livewire.emit('resetDefault');
         });
-
+        window.addEventListener('deleteCategory', function(event){
+            swal.fire({
+                title:event.detail.title,
+                html:event.detail.html,
+                showCancelButton:true,
+                showCloseButton:true,
+                cancelButtonText:'Cancel',
+                confirmButtonText:"Yes, Delete",
+                cancelButtonText:""
+            });
+        });
     </script>
 @endpush

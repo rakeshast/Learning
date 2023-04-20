@@ -84,6 +84,15 @@ class Categories extends Component
         
     }
 
+    public function deleteCategory($id){
+        $category = Category::find($id);
+        $this->dispatchBrowserEvent("deleteCategory", [
+            'title' => "Are you sure?",
+            'html' => "You want to delete <b>'.$category->category_name.'</b> category",
+            'id' => $id
+        ]);
+    }
+
     public function addSubCategory(){
         // dd("working");
         $this->validate([
