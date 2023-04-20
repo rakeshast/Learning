@@ -16,17 +16,19 @@
 @endsection
 
 @push('scripts')
-    <script>
-        
+    <script>        
         window.addEventListener('hideCategoriesModal', function(e){
             $('#categories-modal').modal('hide');
         });
+
         window.addEventListener('showCategoriesModal', function(e){
             $('#categories-modal').modal('show');
         });
+
         window.addEventListener('hideSubCategoriesModal', function(e){
             $('#subcategories-modal').modal('hide');
         });
+
         window.addEventListener('showSubCategoriesModal', function(e){
             $('#subcategories-modal').modal('show');
         });
@@ -35,6 +37,7 @@
             // $(this).find('form').trigger('reset');
             Livewire.emit('resetDefault');
         });
+
         window.addEventListener('deleteCategory', function(event){
             swal.fire({
                 title:event.detail.title,
@@ -53,5 +56,25 @@
                 }
             });
         });
+
+        window.addEventListener('deleteSubCategory', function(event){
+            swal.fire({
+                title:event.detail.title,
+                html:event.detail.html,
+                showCancelButton:true,
+                showCloseButton:true,
+                cancelButtonText:"Cancel",
+                confirmButtonText:"Yes, Delete",
+                cancelButtonColor:"#d33",
+                confirmButtonColor:"#3085d6",
+                width:300,
+                allowOutsideClick:false
+            }).then(function(result){
+                if (result.value) {
+                    window.livewire.emit('deleteSubCategoryAction', event.detail.id);
+                }
+            });
+        });
+
     </script>
 @endpush
