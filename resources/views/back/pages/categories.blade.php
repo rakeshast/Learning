@@ -43,7 +43,14 @@
                 showCloseButton:true,
                 cancelButtonText:'Cancel',
                 confirmButtonText:"Yes, Delete",
-                cancelButtonText:""
+                cancelButtonColor:"#d33",
+                confirmButtonColor:"#3085d6",
+                width:300,
+                allowOutsideClick:false
+            }).then(function(result){
+                if (result.value) {
+                    window.livewire.emit('deleteCategoryAction', event.detail.id);
+                }
             });
         });
     </script>
