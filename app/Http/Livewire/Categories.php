@@ -93,6 +93,10 @@ class Categories extends Component
         ]);
     }
 
+    public function deleteCategoryAction(){
+        
+    }
+
     public function addSubCategory(){
         // dd("working");
         $this->validate([
