@@ -106,3 +106,17 @@
 </div>
 
 @endsection
+@push('stylesheets')
+   <link rel="stylesheet" href="/sharing_buttons/jquery.floating-social-share.min.css">
+@endpush
+@push('scripts')
+    <script src="/sharing_buttons/jquery.floating-social-share.min.js"></script>
+    <script>
+      $("body").floatingSocialShare({
+         buttons: ["facebook","twitter","odnoklassniki","tumblr","viber","vk","whatsapp","reddit","telegram","linkedin","pinterest","mail"],
+         title:"{{ $item->post_title  }}",
+         text:"Share with ",
+         url:"{{route('read_post', $post->post_slug)}}"
+      });
+    </script>
+@endpush
