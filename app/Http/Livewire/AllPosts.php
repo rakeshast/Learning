@@ -11,7 +11,7 @@ class AllPosts extends Component
 {
 
     use WithPagination;
-    public $perPage = 10;
+    public $perPage = 8;
     public $search = null;
     public $author = null;
     public $category = null;

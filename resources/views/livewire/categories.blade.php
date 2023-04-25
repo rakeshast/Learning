@@ -20,9 +20,9 @@
                               <th class="w-1">Action</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody id="sortable_category">
                             @forelse ($categories as $category)
-                                <tr>
+                                <tr data-index="{{$category->id}}" data-ordering="{{$category->ordering}}">
                                     <td>{{ $category->category_name }}</td>
                                     <td class="text-muted">{{ $category->subcategories->count() }}</td>
                                     <td>
@@ -65,11 +65,11 @@
                               <th class="w-1">Action</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody id="sortable_subcategory">
                             @forelse ($subcategories as $subcategory)
-                              <tr>
+                              <tr data-index="{{$subcategory->id}}" data-ordering="{{$subcategory->ordering}}">
                                 <td>{{ $subcategory->subcategory_name }}</td>
-                                <td class="text-muted">{{ $subcategory->parentcategory->category_name }}</td>
+                                <td class="text-muted">{{ $subcategory->parent_category != 0 ? $subcategory->parentcategory->category_name : ' - ' }}</td>
                                 <td>{{ $subcategory->posts->count() }}</td>
                                 <td>
                                   <div class="btn-group">
@@ -144,9 +144,9 @@
             <div class="mb-3">
                 <div class="form-label">Parent Category</div>
                 <select class="form-select" wire:model="parent_category">
-                    @if (!$updateSubCategoryMode)
-                        <option value="">No Selected</option>
-                    @endif
+                    
+                    <option value="0">--Uncategorized--</option>
+                    
                     @foreach (\App\Models\Category::all() as $category)
                         <option value="{{$category->id}}">{{$category->category_name}}</option>
                     @endforeach 

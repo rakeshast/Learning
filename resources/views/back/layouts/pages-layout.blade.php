@@ -21,7 +21,13 @@
     <link href="/back/dist/css/tabler-flags.min.css" rel="stylesheet"/>
     <link href="/back/dist/css/tabler-payments.min.css" rel="stylesheet"/>
     <link href="/back/dist/css/tabler-vendors.min.css" rel="stylesheet"/>
-	  
+	{{-- ReOrder Category & Subcategory CSS --}}
+	<link rel="stylesheet" href="/jquery-ui-1.13.2/jquery-ui.min.css">
+	<link rel="stylesheet" href="/jquery-ui-1.13.2/jquery-ui.structure.min.css">
+	<link rel="stylesheet" href="/jquery-ui-1.13.2/jquery-ui.theme.min.css">
+	{{-- Posts tag supported CSS --}}
+	<link rel="stylesheet" href="/amsify/amsify.suggestags.css">
+
     @stack('stylesheets')
     @livewireStyles
     <link href="/back/dist/css/demo.min.css" rel="stylesheet"/>
@@ -65,11 +71,18 @@
     <script src="/back/dist/libs/jsvectormap/dist/maps/world.js" defer></script>
     <script src="/back/dist/libs/ijaboViewer/jquery.ijaboViewer.min.js"></script>
     <script src="/back/dist/libs/jsvectormap/dist/maps/world-merc.js" defer></script>
+	{{-- ReOrder Category & Subcategory JS --}}
+	<script src="/jquery-ui-1.13.2/jquery-ui.min.js"></script>
+	{{-- Posts tag supported JS --}}
+	<script src="/amsify/jquery.amsify.suggestags.js"></script>
     <!-- Tabler Core -->
     <script src="/back/dist/js/tabler.min.js" defer></script>
     @stack('scripts')
     @livewireScripts
 	<script>
+
+		$('input[name="post_tags"]').amsifySuggestags();
+
 		window.addEventListener('showToastr', function(event){
 			toastr.remove();
 			if (event.detail.type == "info") {

@@ -36,4 +36,12 @@ class Post extends Model
         });
     }
 
+    public function subcategory(){
+        return $this->belongsTo(SubCategory::class, 'category_id', 'id');
+    }
+
+    public function author(){
+        return $this->belongsTo(User::class, 'author_id', 'id');
+    }
+
 }

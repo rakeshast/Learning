@@ -50,6 +50,10 @@
                         <img src="" alt="" class="img-thumbnail" id="image-previewer" data-ijabo-default-img="">
                         <span class="text-danger error_text featured_image_error"></span>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="post_tags">Post tags</label>
+                        <input type="text" class="form-control" name="post_tags">
+                    </div>
                     <button class="btn btn-primary" type="submit" >Save post</button>
                 </div>
             </div>
@@ -84,6 +88,7 @@
                 var form = this;
                 var fromData = new FormData(form);
                     fromData.append('post_content', post_content);
+                  
                 $.ajax({
                     url:$(form).attr('action'),
                     method:$(form).attr('method'),
@@ -101,6 +106,7 @@
                             // $('div.image_holder').html('');
                             $('div.image_holder').find('img').attr('src', '');
                             CKEDITOR.instances.post_content.setData('');
+                            $('input[name="post_tags"]').amsifySuggestags();
                             toastr.success(response.msg);
                         } else {
                             toastr.error(response.msg);
