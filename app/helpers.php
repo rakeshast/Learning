@@ -111,6 +111,19 @@ if (!function_exists('categories')) {
 }
 
 
+/**
+ * DISPLAY LATEST SIDEBAR POSTS 
+ */
+if (!function_exists('latest_sidebar_posts')) {
+    function latest_sidebar_posts($except = null, $limit = 4){
+        return Post::where('id', '!=', $except)
+                    ->limit($limit)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+    }        
+}
+
+
 
 
 ?>
