@@ -85,9 +85,25 @@ class Authors extends Component
                     $message->to($author_email, $author_name)
                         ->subject('Account Creation');
                 });
+
+                // $mail_body = view('new-author-email-template', $data)->render();
+        
+                // $mailConfig = array(
+                //     'mail_from_email' => env("EMAIL_FROM_ADDRESS"),
+                //     'mail_from_name' => env("EMAIL_FROM_NAME"),
+                //     'mail_recipient_email' => $author->email,
+                //     'mail_recipient_name' => $author->name,
+                //     'mail_subject' => "Account Creation",
+                //     'mail_body' => $mail_body,
+                // );
+
+                // sendMail($mailConfig);
+
                 $this->showToastr('New author has been added to blog', 'success');
                 $this->name = $this->username = $this->email = $this->author_type = $this->direct_publisher = null;
                 $this->dispatchBrowserEvent('hide_add_author_modal');
+
+
             } else {
                 $this->showToastr('Something went wrong', 'error');
             }
