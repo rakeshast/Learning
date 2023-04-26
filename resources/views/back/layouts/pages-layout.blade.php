@@ -27,7 +27,7 @@
 	<link rel="stylesheet" href="/jquery-ui-1.13.2/jquery-ui.theme.min.css">
 	{{-- Posts tag supported CSS --}}
 	<link rel="stylesheet" href="/amsify/amsify.suggestags.css">
-
+	<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
     @stack('stylesheets')
     @livewireStyles
     <link href="/back/dist/css/demo.min.css" rel="stylesheet"/>

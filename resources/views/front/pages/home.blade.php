@@ -125,31 +125,22 @@
                    </div>
                 </div>
              </div>
-             @if (recommended_posts())
-             <div class="col-lg-12 col-md-6">
-                <div class="widget">
-                   <h2 class="section-title mb-3">Recommended</h2>
-                   <div class="widget-body">
-                      <div class="widget-list">
-                        @include('front.layouts.inc.recommended_list')
-                      </div>
-                   </div>
-                </div>
-             </div>
-             @endif
 
-             @if (categories())
-             <div class="col-lg-12 col-md-6">
-                <div class="widget">
-                   <h2 class="section-title mb-3">Categories</h2>
-                   <div class="widget-body">
-                      <ul class="widget-list">
-                        @include('front.layouts.inc.categories_list')
-                      </ul>
-                   </div>
-                </div>
-             </div>
-             @endif
+            @if (recommended_posts())
+            <div class="col-lg-12 col-md-6">
+               <div class="widget">
+                  <h2 class="section-title mb-3">Recommended</h2>
+                  <div class="widget-body">
+                     <div class="widget-list">
+                     @include('front.layouts.inc.recommended_list')
+                     </div>
+                  </div>
+               </div>
+            </div>
+            @endif
+
+            <x-categories-list/>
+
           </div>
        </div>
     </div>
