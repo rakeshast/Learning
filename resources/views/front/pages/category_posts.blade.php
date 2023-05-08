@@ -1,7 +1,13 @@
 @extends('front.layouts.pages-layout')
 @section('pageTitle', isset($pageTitle) ? $pageTitle : 'Welcome to Larablog')
 @section('content')
-
+{{-- @php
+   $test = App\Models\SubCategory::select('id')->where('id' ,'>' ,0)->pluck('id')->toarray();
+   dd($test);
+//    echo "<pre>";
+//    print_r($test);
+//    echo "<pre>";
+@endphp --}}
 <div class="row">
     <div class="col-12">
        <h1 class="mb-4 border-bottom border-primary d-inline-block">{{ $category->subcategory_name }}</h1>

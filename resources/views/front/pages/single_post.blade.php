@@ -79,8 +79,8 @@
              *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
            
             var disqus_config = function () {
-            this.page.url = {{ route('read_post', $item->post_slug) }};;  // Replace PAGE_URL with your page's canonical URL variable
-            this.page.identifier = {{ $item->id }}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            this.page.url = {{ route('read_post', $post->post_slug) }};  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = {{ $post->id }}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
             };
            
             (function() { // DON'T EDIT BELOW THIS LINE
@@ -128,7 +128,7 @@
     <script>
       $("body").floatingSocialShare({
          buttons: ["facebook","twitter","odnoklassniki","tumblr","viber","vk","whatsapp","reddit","telegram","linkedin","pinterest","mail"],
-         title:"{{ $item->post_title  }}",
+         title:"{{ $post->post_title  }}",
          text:"Share with ",
          url:"{{route('read_post', $post->post_slug)}}"
       });

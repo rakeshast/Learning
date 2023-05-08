@@ -130,7 +130,7 @@ class AuthorController extends Controller
 
         if ($req->hasFile('featured_image')) {
             $path = "images/post_images/";
-            $file = $req->file('featured_image');
+            $file = $req->file('featured_image');           
             $filename = $file->getClientOriginalName();
             $newfilename = time() . '_' . $filename;
 
