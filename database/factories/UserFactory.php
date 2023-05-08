@@ -14,18 +14,18 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $type = $this->faker->randomElement([1,2]);
+        // $type = $this->faker->randomElement([1,2]);
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$3.Nq.9H4urBIuAGjNcSPeuaxpz71P1E6jqjRoHVL9D7wr/tf7AzIK', // password
-            'remember_token' => Str::random(10),
-            'username' => $this->faker->userName(),
-            'biography' => $this->faker->sentence(),
-            'type' => $type,
-            'blocked' => 0,
-            'direct_publish' => 1
+            // 'name' => "Larablog",
+            // 'email' => "larablog@gmail.com",
+            // 'email_verified_at' => now(),
+            // 'password' => '$2y$10$3.Nq.9H4urBIuAGjNcSPeuaxpz71P1E6jqjRoHVL9D7wr/tf7AzIK', // password
+            // 'remember_token' => Str::random(10),
+            // 'username' => "larablog",
+            // 'biography' => "I am a new Blogger",
+            // 'type' => 1,
+            // 'blocked' => 0,
+            // 'direct_publish' => 1
         ];
 
     }

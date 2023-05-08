@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Type;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TypeFactory extends Factory
@@ -13,10 +14,12 @@ class TypeFactory extends Factory
      */
     public function definition()
     {   
-        $name = array ( "Admin/Super Author", "Author");
+        // $types = array ( "Admin/Super Author", "Author");
+        // $type = $this->faker->unique()->randomElement($types);
+            return [
+                // 'name' => $type
+            ];
 
-        return [
-            'name' => $this->faker->unique(true)->randomElement($name)
-        ];
+           
     }
 }
